@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard with Dropdown Sidebar</title>
+
+    <!-- Include Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            height: 100vh;
+            background-color: #e0f7fa; /* Light blue shade */
+        }
+
+        /* Sidebar styling */
+        .sidebar {
+            width: 250px;
+            background-color: #0d47a1; /* Dark blue */
+            color: white;
+            height: 100vh;
+            position: fixed;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .sidebar a {
+            padding: 15px 20px;
+            text-decoration: none;
+            color: white;
+            display: block;
+            transition: background 0.3s;
+        }
+
+        .sidebar a:hover {
+            background-color: #1565c0; /* Blue hover */
+        }
+
+        .sidebar a.active {
+            background-color: #1976d2; /* Slightly lighter blue for active */
+        }
+
+        .sidebar a i {
+            margin-right: 10px;
+        }
+
+        .profile {
+            text-align: center;
+            padding: 30px 0;
+            border-bottom: 1px solid #1e88e5; /* Light blue */
+        }
+
+        .profile img {
+            width: 80px;
+            border-radius: 50%;
+        }
+
+        .profile h3 {
+            margin-top: 10px;
+            color: white;
+        }
+
+        .content {
+            margin-left: 250px;
+            padding: 20px;
+            flex: 1;
+            background-color: #e3f2fd; /* Light background for content */
+            height: 100vh;
+            overflow-y: auto;
+        }
+
+        .header {
+            background-color: #1976d2; /* Medium blue header */
+            color: white;
+            padding: 10px 20px;
+        }
+
+        .content-area {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Dropdown for Student Operations */
+        .dropdown-btn {
+            padding: 15px 20px;
+            background-color: #0d47a1;
+            border: none;
+            color: white;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            width: 100%;
+            text-align: left;
+        }
+
+        .dropdown-btn i {
+            margin-right: 10px;
+        }
+
+        .dropdown-container {
+            display: none;
+            background-color: #1565c0; /* Dropdown blue shade */
+        }
+
+        .dropdown-container a {
+            padding-left: 40px;
+        }
+
+        .dropdown-btn:focus {
+            outline: none;
+        }
+
+        /* Top Donations Section */
+        .top-donations {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 30px;
+        }
+
+        .donor-card {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            width: 30%;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .donor-card img {
+            width: 60px;
+            border-radius: 50%;
+            margin-bottom: 10px;
+        }
+
+        .donor-card h4 {
+            margin: 10px 0;
+            color: #1976d2;
+        }
+
+        .donor-card p {
+            margin: 5px 0;
+            color: #7f8c8d;
+        }
+
+        /* News Section */
+        .news-section {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .news-section table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .news-section table th, .news-section table td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .news-section table th {
+            background-color: #ecf0f1;
+        }
+
+        .news-section table td button {
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        .news-section table td .edit-btn {
+            color: #1976d2;
+        }
+
+        .news-section table td .delete-btn {
+            color: #e74c3c;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="profile">
+            <img src="https://via.placeholder.com/80" alt="Profile Image">
+            <h3>Sirgiri SaiPramod</h3>
+        </div>
+        <a href="#" class="active"><i class="fas fa-home"></i> Home</a>
+
+        <!-- Dropdown for Student Operations -->
+        <button class="dropdown-btn"><i class="fa fa-users"></i> Student
+            <i class="fa fa-caret-down" style="margin-left:auto;"></i>
+        </button>
+        <div class="dropdown-container">
+            <a href="#"><i class="fas fa-user-plus"></i> Add Student</a>
+            <a href="#"><i class="fas fa-edit"></i> Update Student</a>
+            <a href="#"><i class="fas fa-trash"></i> Delete Student</a>
+            <a href="#"><i class="fas fa-id-card"></i> View Student by ID</a>
+        </div>
+
+        <a href="#"><i class="fas fa-chalkboard-teacher"></i> Faculty</a>
+        <a href="#"><i class="fas fa-user"></i> My Profile</a>
+        <a href="#"><i class="fas fa-sign-out-alt"></i> Logout</a>
+    </div>
+
+    <!-- Content area -->
+    <div class="content">
+        <div class="header">
+            <h2>Dashboard</h2>
+        </div>
+        <div class="content-area">
+            <h3>Welcome to the Admin Dashboard</h3>
+            <p>Select an option from the sidebar to begin.</p>
+
+            <!-- Top Donations Section -->
+            <div class="top-donations">
+                <div class="donor-card">
+                    <img src="https://via.placeholder.com/60" alt="Monika Hetz">
+                    <h4>Monika Hetz</h4>
+                    <p>Bangalore</p>
+                    <p class="amount">$4000</p>
+                </div>
+                <div class="donor-card">
+                    <img src="https://via.placeholder.com/60" alt="Mathue Borden">
+                    <h4>Mathue Borden</h4>
+                    <p>Bangalore</p>
+                    <p class="amount">$4000</p>
+                </div>
+                <div class="donor-card">
+                    <img src="https://via.placeholder.com/60" alt="John Carter">
+                    <h4>John Carter</h4>
+                    <p>Bangalore</p>
+                    <p class="amount">$4000</p>
+                </div>
+            </div>
+
+            <!-- News Section -->
+            <div class="news-section">
+                <h2>News</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Date</th>
+                            <th>Headline</th>
+                            <th>Edit</th>
+                            <th>Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>CAREFEST 2013</td>
+                            <td>18/08/2013</td>
+                            <td>7th Annual Family & Friends Night</td>
+                            <td><button class="edit-btn">&#9998;</button></td>
+                            <td><button class="delete-btn">&#128465;</button></td>
+                        </tr>
+                        <tr>
+                            <td>CAREFEST 2014</td>
+                            <td>18/08/2014</td>
+                            <td>8th Annual Family & Friends Night</td>
+                            <td><button class="edit-btn">&#9998;</button></td>
+                            <td><button class="delete-btn">&#128465;</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript for sidebar and dropdown functionality -->
+    <script>
+        const dropdownBtn = document.querySelector('.dropdown-btn');
+        const dropdownContainer = document.querySelector('.dropdown-container');
+
+        dropdownBtn.addEventListener('click', function () {
+            dropdownContainer.style.display = dropdownContainer.style.display === 'block' ? 'none' : 'block';
+        });
+
+    </script>
+
+</body>
+</html>
